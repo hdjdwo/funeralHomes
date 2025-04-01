@@ -20,6 +20,8 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
+  "moduleResolution": "node",
+    "esModuleInterop": true,
   "include": [
     "src"
   ]
