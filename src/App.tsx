@@ -1,10 +1,17 @@
-import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import CompanyPage from './features/company/CompanyPage';
+import { fetchAuthToken } from './app/auth';
 
 function App() {
+
+  fetchAuthToken();
+
   return (
-    <div className="App">
-     руддщ
-    </div>
+    <Router>
+      <div className="app">
+        <CompanyPage />
+      </div>
+    </Router>
   );
 }
 

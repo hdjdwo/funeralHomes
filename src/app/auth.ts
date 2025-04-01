@@ -1,4 +1,4 @@
-// src/app/auth.ts
+
 export const fetchAuthToken = async (username: string = 'USERNAME') => {
   try {
     const response = await fetch(

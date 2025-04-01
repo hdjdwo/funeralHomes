@@ -1,16 +1,29 @@
+// src/features/company/CompanyInfo.tsx
 import React, { useState } from 'react';
 import { Company } from './companyTypes';
 import { useUpdateCompanyMutation } from './companyApi';
 import EditableField from '../../components/EditableField';
 import styles from './CompanyInfo.module.css';
 
-const CompanyInfo = ({ company, isEditing }: { company: Company; isEditing: boolean }) => {
+interface CompanyInfoProps {
+  company: Company;
+  isEditing: boolean;
+  onUpdate: () => void;
+}
+
+const CompanyInfo: React.FC<CompanyInfoProps> = ({ company, isEditing, onUpdate }) => {
   const [updateCompany] = useUpdateCompanyMutation();
   const [localData, setLocalData] = useState(company);
+
+  const validateName = (value: string) => {
+    if (value.length < 3) return 'Name must be at least 3 characters';
+    return null;
+  };
 
   const handleSave = async () => {
     try {
       await updateCompany({ id: company.id, ...localData }).unwrap();
+      onUpdate();
     } catch (error) {
       console.error('Failed to update company:', error);
     }
@@ -20,13 +33,13 @@ const CompanyInfo = ({ company, isEditing }: { company: Company; isEditing: bool
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>Company Information</h3>
       <div className={styles.grid}>
-      <EditableField
-        label="Full Name"
-        value={localData.name}
-        editing={isEditing}
-        validate={validateName}
-        onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
-      />
+        <EditableField
+          label="Full Name"
+          value={localData.name}
+          editing={isEditing}
+          validate={validateName}
+          onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
+        />
         <EditableField
           label="Short Name"
           value={localData.shortName}
@@ -60,17 +73,9 @@ const CompanyInfo = ({ company, isEditing }: { company: Company; isEditing: bool
         />
       </div>
       {isEditing && (
-        <div className={styles.buttons}>
-          <button className={styles.saveButton} onClick={handleSave}>
-            Save
-          </button>
-          <button 
-            className={styles.cancelButton}
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
-        </div>
+        <button className={styles.saveButton} onClick={handleSave}>
+          Save Changes
+        </button>
       )}
     </div>
   );

@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import styles from '../components/ImageUploader.module.css';
+import styles from './ImageUploader.module.css';
 
-const ImageUploader = ({ onUpload }) => {
+interface ImageUploaderProps {
+  onUpload: (file: File) => void;
+}
+
+const ImageUploader: React.FC<ImageUploaderProps> = ({ onUpload }) => {
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
