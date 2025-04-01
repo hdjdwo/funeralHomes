@@ -1,48 +1,80 @@
-.section {
-    margin-bottom: 32px;
-    padding: 16px;
-    border: 1px solid #eee;
-    border-radius: 8px;
-  }
-  
-  .sectionTitle {
-    font-size: 18px;
-    color: #666;
-    margin-top: 0;
-    margin-bottom: 16px;
+.photosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.photoItem {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s;
+}
+
+.deletePhotoButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploader {
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  background: #F9F9F9;
+}
+
+.uploader:hover {
+  border-color: var(--primary-color);
+}
+
+.uploadText {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
   
   .photosGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 16px;
   }
   
-  .photoItem {
-    position: relative;
-    aspect-ratio: 1;
+  .sectionTitle {
+    font-size: 16px;
   }
   
-  .thumbnail {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
+  .input {
+    font-size: 13px;
   }
-  
-  .deleteButton {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: #dc3545;
-    color: white;
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-  }
+}

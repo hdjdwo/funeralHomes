@@ -37,7 +37,7 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contact, isEditing, onUpdate 
           label="First Name"
           value={localData.firstname}
           editing={isEditing}
-          onChange={(e) => setLocalData({ ...localData, firstname: e.target.value })}
+          onChange={(e ) => setLocalData({ ...localData, firstname: e.target.value })}
         />
         <EditableField
           label="Last Name"

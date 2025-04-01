@@ -1,4 +1,4 @@
-// src/components/EditableField.tsx
+
 import React from 'react';
 import styles from './EditableField.module.css';
 

@@ -1,35 +1,63 @@
 .card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 24px;
-    margin: 20px;
-    max-width: 800px;
-  }
-  
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  padding: 32px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.buttonsContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.editButton {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.deleteButton {
+  background: #FF5B5B;
+  color: var(--white);
+}
+
+@media (max-width: 480px) {
   .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
   
-  .title {
-    font-size: 24px;
-    color: #333;
-    margin: 0;
+  .buttonsContainer {
+    width: 100%;
+    flex-direction: column;
   }
   
-  .editButton {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: opacity 0.3s;
+  .button {
+    width: 100%;
+    text-align: center;
   }
-  
-  .editButton:hover {
-    opacity: 0.9;
-  }
+}
