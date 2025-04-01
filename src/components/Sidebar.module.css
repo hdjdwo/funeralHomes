@@ -1,44 +1,101 @@
 .sidebar {
-    width: 280px;
-    height: 100vh;
-    background: #1A1D1F;
-    padding: 32px 24px;
-    position: fixed;
-    left: 0;
-    top: 0;
-  }
-  
-  .logo {
-    color: #FFFFFF;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 48px;
-    padding-left: 12px;
-  }
-  
-  .menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menuItem {
-    color: #6F767E;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    transition: all 0.2s;
-  }
-  
-  .menuItemActive {
-    composes: menuItem;
-    background: #2D81E0;
-    color: #FFFFFF;
-  }
-  
-  .menuIcon {
-    margin-right: 12px;
-    font-size: 20px;
-  }
+  width: 280px;
+  height: 100vh;
+  background: #1A1D1F;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px 32px;
+  border-bottom: 1px solid #2A2D30;
+}
+
+.logo svg {
+  flex-shrink: 0;
+}
+
+.logo span {
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.menu {
+  flex: 1;
+  padding: 32px 0;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  color: #6F767E;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  margin: 4px 0;
+}
+
+.menuItem:hover {
+  background: rgba(45, 129, 224, 0.08);
+}
+
+.menuItem.active {
+  background: #2D81E0;
+  color: #FFFFFF;
+}
+
+.menuItem svg {
+  flex-shrink: 0;
+}
+
+.footer {
+  border-top: 1px solid #2A2D30;
+  padding-top: 24px;
+}
+
+.userPanel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2D81E0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.userRole {
+  color: #6F767E;
+  font-size: 12px;
+}

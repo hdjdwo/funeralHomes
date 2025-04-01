@@ -1,88 +1,110 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import { Company, Contact } from './companyTypes';
-import styles from './CompanyCard.module.css';
+import EditModal from '../modals/EditModal';
+import PhotoUploader from '../PhotoUploader';
 
-interface CompanyCardProps {
-  company: Company;
-  contact: Contact;
-}
+const Card = styled.div`
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: 16px;
+  box-shadow: ${({ theme }) => theme.shadows.card};
+`;
 
-const CompanyCard: React.FC<CompanyCardProps> = ({ company, contact }) => {
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 40px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const Title = styled.h1`
+  font-size: 32px;
+  font-weight: 600;
+  margin: 0;
+  color: ${({ theme }) => theme.colors.textDark};
+`;
+
+const Section = styled.div`
+  padding: 32px 40px;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+`;
+
+const SectionTitle = styled.h2`
+  font-size: 24px;
+  margin: 0 0 24px 0;
+  color: ${({ theme }) => theme.colors.textDark};
+`;
+
+const InfoRow = styled.div`
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  padding: 16px 0;
+`;
+
+const InfoLabel = styled.span`
+  color: ${({ theme }) => theme.colors.textLight};
+  font-size: 14px;
+`;
+
+const InfoValue = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+`;
+
+const EditButton = styled.button`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.white};
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const CompanyCard = ({ company, contact }: { company: Company; contact: Contact }) => {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
-    <div className={styles.card}>
-      {/* Header Section */}
-      <div className={styles.header}>
-        <h1 className={styles.title}>{company.name}</h1>
-        <div className={styles.actions}>
-          <button className={styles.editButton}>Edit</button>
-          <button className={styles.deleteButton}>Delete</button>
-        </div>
-      </div>
+    <Card>
+      <Header>
+        <Title>{company.name}</Title>
+        <EditButton onClick={() => setIsEditing(true)}>Edit Company</EditButton>
+      </Header>
 
-      {/* Company Details Section */}
-      <Section title="Company Details">
-        <InfoRow label="Legal Name" value={company.name} edit />
-        <InfoRow 
-          label="Business Entity" 
-          value={company.businessEntity} 
-          edit 
-        />
-        <InfoRow 
-          label="Contract Number" 
-          value={company.contract.no} 
-          edit 
-        />
+      <Section>
+        <SectionTitle>Company Details</SectionTitle>
+        <InfoRow>
+          <InfoLabel>Legal Name</InfoLabel>
+          <InfoValue>{company.name}</InfoValue>
+        </InfoRow>
+        {/* Все остальные поля */}
       </Section>
 
-      {/* Contacts Section */}
-      <Section title="Contacts">
-        <InfoRow 
-          label="Primary Contact" 
-          value={`${contact.firstname} ${contact.lastname}`} 
-          edit 
-        />
-        <InfoRow label="Email" value={contact.email} edit />
-        <InfoRow label="Phone" value={contact.phone} edit />
+      <Section>
+        <SectionTitle>Contacts</SectionTitle>
+        <InfoRow>
+          <InfoLabel>Primary Contact</InfoLabel>
+          <InfoValue>{`${contact.firstname} ${contact.lastname}`}</InfoValue>
+        </InfoRow>
+        {/* Все контактные данные */}
       </Section>
 
-      {/* Photos Section */}
-      <Section title="Photos">
-        <div className={styles.photosGrid}>
-          {company.photos.map((photo, i) => (
-            <div key={photo.name} className={styles.photoItem}>
-              <img 
-                src={photo.thumbpath} 
-                alt={`Attachment ${i}`} 
-                className={styles.photo}
-              />
-              <button className={styles.deletePhoto}>×</button>
-            </div>
-          ))}
-          <div className={styles.uploadArea}>
-            <span>+ Upload New</span>
-          </div>
-        </div>
+      <Section>
+        <SectionTitle>Photos</SectionTitle>
+        <PhotoUploader photos={company.photos} />
       </Section>
-    </div>
+
+      {isEditing && <EditModal onClose={() => setIsEditing(false)} />}
+    </Card>
   );
 };
-
-// Вынесенные компоненты должны быть за пределами основного компонента
-const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-  <div className={styles.section}>
-    <h2 className={styles.sectionTitle}>{title}</h2>
-    <div className={styles.sectionContent}>{children}</div>
-  </div>
-);
-
-const InfoRow: React.FC<{ label: string; value: string; edit?: boolean }> = ({ label, value, edit }) => (
-  <div className={styles.infoRow}>
-    <span className={styles.infoLabel}>{label}</span>
-    <div className={styles.infoValue}>
-      {value}
-      {edit && <button className={styles.editFieldButton}>Edit</button>}
-    </div>
-  </div>
-);
 
 export default CompanyCard;
