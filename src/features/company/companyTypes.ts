@@ -25,6 +25,7 @@ export interface Contact {
   updatedAt: string;
 }
 
+
 export interface Photo {
   name: string;
   filepath: string;

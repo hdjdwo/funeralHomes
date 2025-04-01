@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Photo } from '../features/company/companyTypes';
 
 const Uploader = styled.div`
   display: grid;
@@ -14,6 +15,13 @@ const PhotoItem = styled.div`
   aspect-ratio: 1;
 `;
 
+const Thumbnail = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s;
+`;
+
 const DeleteButton = styled.button`
   position: absolute;
   top: 12px;
@@ -25,6 +33,9 @@ const DeleteButton = styled.button`
   height: 32px;
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const AddButton = styled.div`
@@ -44,12 +55,18 @@ const AddButton = styled.div`
   }
 `;
 
-const PhotoUploader = ({ photos }: { photos: any[] }) => {
+const PhotoUploader = ({ photos }: { photos: Photo[] }) => {
   return (
     <Uploader>
       {photos.map((photo) => (
-        <PhotoItem key={photo.id}>
-          <img src={photo.url} alt="Company" />
+        <PhotoItem key={photo.name}>
+          <Thumbnail 
+            src={photo.thumbpath} 
+            alt={`Attachment ${photo.name}`}
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/placeholder.jpg';
+            }}
+          />
           <DeleteButton>×</DeleteButton>
         </PhotoItem>
       ))}
