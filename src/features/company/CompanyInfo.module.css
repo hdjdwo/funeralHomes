@@ -27,3 +27,18 @@
     margin-top: 16px;
     cursor: pointer;
   }
+
+  .buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  
+  .cancelButton {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }

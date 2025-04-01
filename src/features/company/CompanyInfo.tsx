@@ -20,12 +20,13 @@ const CompanyInfo = ({ company, isEditing }: { company: Company; isEditing: bool
     <div className={styles.section}>
       <h3 className={styles.sectionTitle}>Company Information</h3>
       <div className={styles.grid}>
-        <EditableField
-          label="Full Name"
-          value={localData.name}
-          editing={isEditing}
-          onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
-        />
+      <EditableField
+        label="Full Name"
+        value={localData.name}
+        editing={isEditing}
+        validate={validateName}
+        onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
+      />
         <EditableField
           label="Short Name"
           value={localData.shortName}
@@ -59,9 +60,17 @@ const CompanyInfo = ({ company, isEditing }: { company: Company; isEditing: bool
         />
       </div>
       {isEditing && (
-        <button className={styles.saveButton} onClick={handleSave}>
-          Save Changes
-        </button>
+        <div className={styles.buttons}>
+          <button className={styles.saveButton} onClick={handleSave}>
+            Save
+          </button>
+          <button 
+            className={styles.cancelButton}
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        </div>
       )}
     </div>
   );
