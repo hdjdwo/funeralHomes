@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Sidebar from './Sidebar';
+import styles from './MainLayout.module.css';
 
 const LayoutContainer = styled.div<{ theme: any }>`
   display: grid;
@@ -17,12 +18,16 @@ const MainContent = styled.main`
   }
 `;
 
+
+
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <LayoutContainer>
+    <div className={styles.layout}>
       <Sidebar />
-      <MainContent>{children}</MainContent>
-    </LayoutContainer>
+      <main className={styles.mainContent}>
+        {children}
+      </main>
+    </div>
   );
 };
 

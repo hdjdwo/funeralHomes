@@ -1,25 +1,21 @@
 .layout {
-    display: flex;
-    min-height: 100vh;
-    background: #F4F4F4;
-  }
-  
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.mainContent {
+  flex: 1;
+  margin-left: 280px; /* Ширина сайдбара */
+  padding: 48px;
+  background: #F4F4F4;
+  min-height: 100vh;
+  transition: margin 0.3s;
+}
+
+@media (max-width: 768px) {
   .mainContent {
-    flex: 1;
-    margin-left: 280px;
-    padding: 48px;
+    margin-left: 0;
+    padding: 24px;
   }
-  
-  @media (max-width: 1200px) {
-    .mainContent {
-      padding: 24px;
-      margin-left: 0;
-      padding-top: 100px;
-    }
-    
-    .sidebar {
-      width: 100%;
-      height: auto;
-      position: static;
-    }
-  }
+}
