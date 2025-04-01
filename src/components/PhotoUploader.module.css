@@ -1,0 +1,17 @@
+.uploadLabel {
+    display: block;
+    margin-top: 16px;
+  }
+  
+  .uploadArea {
+    border: 2px dashed #EFEFEF;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  .uploadArea:hover {
+    border-color: #2D81E0;
+  }

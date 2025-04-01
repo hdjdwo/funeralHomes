@@ -8,7 +8,8 @@ const CompanyPage = () => {
   const { 
     data: company, 
     isLoading: companyLoading,
-    isError: companyError
+    isError: companyError,
+    refetch: refetchCompany
   } = useGetCompanyQuery('12');
   
   const { 
@@ -17,14 +18,18 @@ const CompanyPage = () => {
     isError: contactError
   } = useGetContactQuery(company?.contactId || '16');
 
-  if (companyLoading || contactLoading) return <LoadingSpinner />;
+  if (companyLoading || contactLoading) return <div>Loading...</div>;
   if (companyError || contactError || !company || !contact) {
-    return <ErrorMessage message="Failed to load company data" />;
+    return <div>Error loading data</div>;
   }
 
   return (
     <div className="container">
-      <CompanyCard company={company} contact={contact} />
+      <CompanyCard 
+        company={company} 
+        contact={contact} 
+        refetch={refetchCompany} 
+      />
     </div>
   );
 };

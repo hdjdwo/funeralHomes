@@ -21,10 +21,14 @@ const CompanyInfo: React.FC<CompanyInfoProps> = ({ company, onUpdate }) => {
     try {
       await updateCompany({
         id: company.id,
-        ...localData,
+        name: localData.name,
+        shortName: localData.shortName,
+        businessEntity: localData.businessEntity,
         contract: {
-          ...localData.contract
-        }
+          no: localData.contract.no,
+          issue_date: localData.contract.issue_date
+        },
+        type: localData.type
       }).unwrap();
       onUpdate();
     } catch (error) {
@@ -41,7 +45,33 @@ const CompanyInfo: React.FC<CompanyInfoProps> = ({ company, onUpdate }) => {
           value={localData.name}
           onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
         />
-        {/* Добавьте остальные поля */}
+        <EditableField
+          label="Short Name"
+          value={localData.shortName}
+          onChange={(e) => setLocalData({ ...localData, shortName: e.target.value })}
+        />
+        <EditableField
+          label="Business Entity"
+          value={localData.businessEntity}
+          onChange={(e) => setLocalData({ ...localData, businessEntity: e.target.value })}
+        />
+        <EditableField
+          label="Contract Number"
+          value={localData.contract.no}
+          onChange={(e) => setLocalData({
+            ...localData,
+            contract: { ...localData.contract, no: e.target.value }
+          })}
+        />
+        <EditableField
+          label="Contract Date"
+          type="date"
+          value={new Date(localData.contract.issue_date).toISOString().split('T')[0]}
+          onChange={(e) => setLocalData({
+            ...localData,
+            contract: { ...localData.contract, issue_date: e.target.value }
+          })}
+        />
       </div>
       <button className={styles.saveButton} onClick={handleSave}>
         Save Changes

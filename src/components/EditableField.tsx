@@ -5,7 +5,7 @@ import styles from './EditableField.module.css';
 interface EditableFieldProps {
   label: string;
   value: string;
-  editing: boolean;
+  editing?: boolean;
   type?: React.HTMLInputTypeAttribute;
   error?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

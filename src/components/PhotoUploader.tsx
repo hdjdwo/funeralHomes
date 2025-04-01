@@ -1,8 +1,13 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useUploadImageMutation } from '../features/company/companyApi';
 import styles from './PhotoUploader.module.css';
 
-const PhotoUploader: React.FC<{ companyId: string; onUpload: () => void }> = ({ companyId, onUpload }) => {
+interface PhotoUploaderProps {
+  companyId: string;
+  onUpload: () => void;
+}
+
+const PhotoUploader: React.FC<PhotoUploaderProps> = ({ companyId, onUpload }) => {
   const [uploadImage] = useUploadImageMutation();
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +16,7 @@ const PhotoUploader: React.FC<{ companyId: string; onUpload: () => void }> = ({ 
       const formData = new FormData();
       formData.append('file', file);
       try {
-        await uploadImage({ id: companyId, file: formData }).unwrap();
+        await uploadImage({ id: companyId, formData }).unwrap();
         onUpload();
       } catch (error) {
         console.error('Upload failed:', error);
