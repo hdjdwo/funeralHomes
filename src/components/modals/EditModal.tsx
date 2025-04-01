@@ -26,7 +26,7 @@ const EditModal = ({ onClose }: { onClose: () => void }) => {
     <ModalBackdrop>
       <ModalContent>
         <h2>Edit Company Details</h2>
-        {/* Форма редактирования */}
+        {/* Добавьте форму редактирования */}
         <button onClick={onClose}>Close</button>
       </ModalContent>
     </ModalBackdrop>

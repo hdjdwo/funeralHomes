@@ -27,20 +27,6 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `;
 
-const PhotoUploader = ({ photos }: { photos: any[] }) => {
-  return (
-    <Uploader>
-      {photos.map((photo) => (
-        <PhotoItem key={photo.id}>
-          <img src={photo.url} alt="Company" />
-          <DeleteButton>×</DeleteButton>
-        </PhotoItem>
-      ))}
-      <AddButton>+ Add Photo</AddButton>
-    </Uploader>
-  );
-};
-
 const AddButton = styled.div`
   border: 2px dashed #EFEFEF;
   border-radius: 12px;
@@ -57,5 +43,19 @@ const AddButton = styled.div`
     border-color: #2D81E0;
   }
 `;
+
+const PhotoUploader = ({ photos }: { photos: any[] }) => {
+  return (
+    <Uploader>
+      {photos.map((photo) => (
+        <PhotoItem key={photo.id}>
+          <img src={photo.url} alt="Company" />
+          <DeleteButton>×</DeleteButton>
+        </PhotoItem>
+      ))}
+      <AddButton>+ Add Photo</AddButton>
+    </Uploader>
+  );
+};
 
 export default PhotoUploader;

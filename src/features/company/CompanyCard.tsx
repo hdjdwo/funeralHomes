@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Company, Contact } from './companyTypes';
-import EditModal from '../modals/EditModal';
-import PhotoUploader from '../PhotoUploader';
+import EditModal from '../../components/modals/EditModal';
+import PhotoUploader from '../../components/PhotoUploader';
 
 const Card = styled.div`
   background: ${({ theme }) => theme.colors.white};
