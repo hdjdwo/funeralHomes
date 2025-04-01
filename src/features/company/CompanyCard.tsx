@@ -4,13 +4,13 @@ import { Company, Contact } from './companyTypes';
 import EditModal from '../../components/modals/EditModal';
 import PhotoUploader from '../../components/PhotoUploader';
 
-const Card = styled.div`
+const Card = styled.div<{ theme: any }>`
   background: ${({ theme }) => theme.colors.white};
   border-radius: 16px;
   box-shadow: ${({ theme }) => theme.shadows.card};
 `;
 
-const Header = styled.div`
+const Header = styled.div<{ theme: any }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,19 +18,19 @@ const Header = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
-const Title = styled.h1`
+const Title = styled.h1<{ theme: any }>`
   font-size: 32px;
   font-weight: 600;
   margin: 0;
   color: ${({ theme }) => theme.colors.textDark};
 `;
 
-const Section = styled.div`
+const Section = styled.div<{ theme: any }>`
   padding: 32px 40px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.h2<{ theme: any }>`
   font-size: 24px;
   margin: 0 0 24px 0;
   color: ${({ theme }) => theme.colors.textDark};
@@ -43,19 +43,12 @@ const InfoRow = styled.div`
   padding: 16px 0;
 `;
 
-const InfoLabel = styled.span`
+const InfoLabel = styled.span<{ theme: any }>`
   color: ${({ theme }) => theme.colors.textLight};
   font-size: 14px;
 `;
 
-const InfoValue = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 500;
-`;
-
-const EditButton = styled.button`
+const EditButton = styled.button<{ theme: any }>`
   background: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.white};
   padding: 12px 24px;
@@ -83,18 +76,16 @@ const CompanyCard = ({ company, contact }: { company: Company; contact: Contact 
         <SectionTitle>Company Details</SectionTitle>
         <InfoRow>
           <InfoLabel>Legal Name</InfoLabel>
-          <InfoValue>{company.name}</InfoValue>
+          <span>{company.name}</span>
         </InfoRow>
-        {/* Все остальные поля */}
       </Section>
 
       <Section>
         <SectionTitle>Contacts</SectionTitle>
         <InfoRow>
           <InfoLabel>Primary Contact</InfoLabel>
-          <InfoValue>{`${contact.firstname} ${contact.lastname}`}</InfoValue>
+          <span>{`${contact.firstname} ${contact.lastname}`}</span>
         </InfoRow>
-        {/* Все контактные данные */}
       </Section>
 
       <Section>
