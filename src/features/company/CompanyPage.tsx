@@ -1,5 +1,4 @@
-// src/features/company/CompanyPage.tsx
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useGetCompanyQuery, useGetContactQuery } from './companyApi';
 import CompanyCard from './CompanyCard';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -9,8 +8,7 @@ const CompanyPage = () => {
   const { 
     data: company, 
     isLoading: companyLoading,
-    isError: companyError,
-    refetch: refetchCompany
+    isError: companyError
   } = useGetCompanyQuery('12');
   
   const { 
@@ -18,12 +16,6 @@ const CompanyPage = () => {
     isLoading: contactLoading,
     isError: contactError
   } = useGetContactQuery(company?.contactId || '16');
-
-  useEffect(() => {
-    if (companyError || contactError) {
-      console.error('Error loading data:', { companyError, contactError });
-    }
-  }, [companyError, contactError]);
 
   if (companyLoading || contactLoading) return <LoadingSpinner />;
   if (companyError || contactError || !company || !contact) {

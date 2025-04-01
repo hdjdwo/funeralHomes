@@ -1,0 +1,25 @@
+.layout {
+    display: flex;
+    min-height: 100vh;
+    background: #F4F4F4;
+  }
+  
+  .mainContent {
+    flex: 1;
+    margin-left: 280px;
+    padding: 48px;
+  }
+  
+  @media (max-width: 1200px) {
+    .mainContent {
+      padding: 24px;
+      margin-left: 0;
+      padding-top: 100px;
+    }
+    
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: static;
+    }
+  }
