@@ -1,4 +1,3 @@
-// src/features/company/CompanyInfo.tsx
 import React, { useState } from 'react';
 import { Company } from './companyTypes';
 import { useUpdateCompanyMutation } from './companyApi';
@@ -15,17 +14,18 @@ const CompanyInfo: React.FC<CompanyInfoProps> = ({ company, isEditing, onUpdate 
   const [updateCompany] = useUpdateCompanyMutation();
   const [localData, setLocalData] = useState(company);
 
-  const validateName = (value: string) => {
-    if (value.length < 3) return 'Name must be at least 3 characters';
-    return null;
-  };
-
   const handleSave = async () => {
     try {
-      await updateCompany({ id: company.id, ...localData }).unwrap();
+      await updateCompany({
+        id: company.id,
+        name: localData.name,
+        shortName: localData.shortName,
+        businessEntity: localData.businessEntity,
+        contract: localData.contract
+      }).unwrap();
       onUpdate();
     } catch (error) {
-      console.error('Failed to update company:', error);
+      console.error('Update failed:', error);
     }
   };
 
@@ -37,7 +37,6 @@ const CompanyInfo: React.FC<CompanyInfoProps> = ({ company, isEditing, onUpdate 
           label="Full Name"
           value={localData.name}
           editing={isEditing}
-          validate={validateName}
           onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
         />
         <EditableField
@@ -73,7 +72,10 @@ const CompanyInfo: React.FC<CompanyInfoProps> = ({ company, isEditing, onUpdate 
         />
       </div>
       {isEditing && (
-        <button className={styles.saveButton} onClick={handleSave}>
+        <button 
+          className={styles.saveButton}
+          onClick={handleSave}
+        >
           Save Changes
         </button>
       )}

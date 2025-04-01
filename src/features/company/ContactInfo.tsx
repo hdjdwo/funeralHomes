@@ -4,15 +4,28 @@ import { useUpdateContactMutation } from './companyApi';
 import EditableField from '../../components/EditableField';
 import styles from './ContactInfo.module.css';
 
-const ContactInfo = ({ contact, isEditing }: { contact: Contact; isEditing: boolean }) => {
+interface ContactInfoProps {
+  contact: Contact;
+  isEditing: boolean;
+  onUpdate: () => void;
+}
+
+const ContactInfo: React.FC<ContactInfoProps> = ({ contact, isEditing, onUpdate }) => {
   const [updateContact] = useUpdateContactMutation();
   const [localData, setLocalData] = useState(contact);
 
   const handleSave = async () => {
     try {
-      await updateContact({ id: contact.id, ...localData }).unwrap();
+      await updateContact({
+        id: contact.id,
+        lastname: localData.lastname,
+        firstname: localData.firstname,
+        phone: localData.phone,
+        email: localData.email
+      }).unwrap();
+      onUpdate();
     } catch (error) {
-      console.error('Failed to update contact:', error);
+      console.error('Update failed:', error);
     }
   };
 
@@ -46,7 +59,10 @@ const ContactInfo = ({ contact, isEditing }: { contact: Contact; isEditing: bool
         />
       </div>
       {isEditing && (
-        <button className={styles.saveButton} onClick={handleSave}>
+        <button 
+          className={styles.saveButton}
+          onClick={handleSave}
+        >
           Save Changes
         </button>
       )}

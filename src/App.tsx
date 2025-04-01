@@ -1,4 +1,4 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter, Router} from 'react-router-dom';
 import CompanyPage from './features/company/CompanyPage';
 import { fetchAuthToken } from './app/auth';
 
